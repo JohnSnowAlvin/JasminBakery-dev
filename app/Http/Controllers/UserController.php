@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class AdminUsersController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +16,14 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return view('admin/user/index',compact('user'));
+        $user = Auth::user();
+        return view('user/profile',compact('user'));
     }
 
+    public function cancel()
+    {
+        return view('user/profile');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -58,7 +64,8 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('user/edit',compact('user'));
     }
 
     /**
@@ -68,13 +75,12 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $user = User::findOrFail($id);
         $input = $request->all();
         $user->update($input);
-        return redirect('admin/user/profile');
-    }
+        return redirect('user/profile');    }
 
     /**
      * Remove the specified resource from storage.

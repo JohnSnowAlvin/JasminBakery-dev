@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Order;
+use App\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use function Sodium\compare;
 
-class AdminUsersController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +18,9 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return view('admin/user/index',compact('user'));
+        $user = Auth::user();
+        $product = Product::all();
+        return view('checkOut', compact('user', 'product'));
     }
 
     /**
@@ -31,18 +36,26 @@ class AdminUsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $user = Auth::user();
+        $product = Auth::product();
+//        $product = Cart::content('id');
+        $input['user_id'] = $user->id;
+        $input['product_id'] = $product->id;
+        Order::create($input);
+
+        return redirect('checkOut');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -53,7 +66,7 @@ class AdminUsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,22 +77,19 @@ class AdminUsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $input = $request->all();
-        $user->update($input);
-        return redirect('admin/user/profile');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

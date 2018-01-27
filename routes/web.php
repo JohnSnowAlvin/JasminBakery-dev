@@ -28,11 +28,13 @@ Route::resource('admin/product','ProductsController');
 
 Route::resource('admin/user','AdminUsersController');
 
-Route::get('admin/user/driver','AdminUsersController@driver');
-
 Route::post('/cart','CartController@add');
 
 Route::view('/cartView','cartView');
+
+Route::resource('user/profile','UserController');
+
+Route::resource('/checkOut','OrderController');
 
 //Route::post('/cartEdit','CartController@cart');
 
