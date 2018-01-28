@@ -74,13 +74,13 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('logout') }}">
+                                    <a href="{{ url('/user/order') }}">
                                         My Orders
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('logout') }}">
-                                        My Returns & Cancellations
+                                    <a href="{{ url('/user/returnProduct') }}">
+                                        Return Expired Product
                                     </a>
                                 </li>
                                 <li>

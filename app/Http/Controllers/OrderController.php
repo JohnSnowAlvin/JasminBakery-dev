@@ -20,8 +20,16 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $product = Product::all();
-        return view('checkOut', compact('user', 'product'));
+        return view('user/userOrder',compact('user','product'));
     }
+
+    public function return()
+    {
+        $user = Auth::user();
+        $product = Product::all();
+        return view('user/returnProduct',compact('user','product'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/homes', 'HomeController@userHome')->name('homes');
+
 //Route::get('/products')
 
 //Route::view('products','products');
@@ -34,7 +36,9 @@ Route::view('/cartView','cartView');
 
 Route::resource('user/profile','UserController');
 
-Route::resource('/checkOut','OrderController');
+Route::resource('user/order','OrderController');
+
+Route::get('user/returnProduct','OrderController@return');
 
 //Route::post('/cartEdit','CartController@cart');
 
