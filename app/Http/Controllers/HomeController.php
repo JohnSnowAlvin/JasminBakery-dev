@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
 use ConsoleTVs\Charts\Facades\Charts;
 use Illuminate\Http\Request;
 
@@ -30,8 +31,9 @@ class HomeController extends Controller
 
     public function orderlist()
     {
+        $user = User::all();
         $orders = Order::all();
-        return view('admin/orderList',compact('orders'));
+        return view('admin/orderList',compact('orders','user'));
     }
 
     public function chart()

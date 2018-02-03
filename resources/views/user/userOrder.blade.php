@@ -6,19 +6,19 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Order History</div>
+                    <ol class="breadcrumb">
+                        <li class="active">Order History</li>
+                        <li><a href="/user/myReturnOrder">My Return Order</a></li>
+                    </ol>
 
                     <table class="table">
-                        <tr>
-                            <td>Orders</td>
-                        </tr>
                         @if($orders->count())
                             <table class="table table-condensed">
                                 <thead>
 
                                 <tr class="cart_menu">
                                     <td class="image">Order ID</td>
-                                    <td class="description">Item</td>
+                                    <td class="description">Product Name</td>
                                     <td class="price">Price</td>
                                     <td class="quantity">Quantity</td>
                                     <td class="total">Sub Total</td>
@@ -40,7 +40,7 @@
                                         </td>
                                         <td class="cart_description">
                                             <h4>{{$item->itemName}}</h4>
-                                            <p><img src="{{ asset('images/'.$item->image) }}" class="img-responsive" style="width: 100px; height: 80px;"></p>
+                                            {{--<p><img src="{{ asset('images/'.$item->image) }}" class="img-responsive" style="width: 100px; height: 80px;"></p>--}}
                                         </td>
                                         <td class="cart_price">
                                             <p>${{$item->price}}</p>
@@ -57,15 +57,15 @@
                                         <td class="cart_delete">
                                             <p>{{$item->updated_at}}</p>
                                         </td>
-                                        <td>
-                                            <form method="GET" action="{{url('orderHistory/'.$item->cartRowID.'/edit')}}">
-                                                <input type="hidden" name="id" value="{{$item->cartRowID}}">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <button type="submit" class="btn btn-danger">
-                                                    Return
-                                                </button>
-                                            </form>
-                                        </td>
+                                        {{--<td>--}}
+                                            {{--<form method="GET" action="{{url('orderHistory/'.$item->cartRowID.'/edit')}}">--}}
+                                                {{--<input type="hidden" name="id" value="{{$item->cartRowID}}">--}}
+                                                {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+                                                {{--<button type="submit" class="btn btn-danger">--}}
+                                                    {{--Return--}}
+                                                {{--</button>--}}
+                                            {{--</form>--}}
+                                        {{--</td>--}}
                                     </tr>
 
                                 @endforeach
@@ -83,23 +83,6 @@
                                 @endif
                                 </tbody>
                             </table>
-                        @foreach($product as $product)
-                            <tr>
-                                <td><img src="{{asset('images/'.$product->photo->file)}}"
-                                         class="img-responsive img-rounded" style="width:200px;height:100px;"></td>
-                                <td>{{$product->name}}<br>
-                                    <input type="button" class="btn btn-group" value="Delivered"></td>
-                                <td><br>
-                                    <form method="POST" action="{{url('cart')}}">
-                                        <input type="hidden" name="id" value="{{$product->id}}">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <button type="submit" class="btn btn-primary add-to-cart">
-                                            <i class="fa fa-shopping-cart"></i> ReOrder Product
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
                     </table>
                 </div>
             </div>

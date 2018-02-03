@@ -11,4 +11,9 @@ class Order extends Model
     protected $fillable = [
         'orderID','userID', 'cartRowID', 'itemID', 'itemName', 'qty', 'price','subtotal','returnOrder'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

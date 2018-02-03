@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Product;
+use App\ReturnOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -31,10 +32,29 @@ class OrderController extends Controller
     public function return()
     {
         $user = Auth::user();
-        $product = Product::all();
-        return view('user/returnProduct',compact('user','product'));
+        $pname = Product::pluck('name','id')->all();
+        return view('user/returnProduct',compact('user','pname'));
     }
 
+    public function myreturn(Request $request)
+    {
+        $user = Auth::user();
+        $product = Product::all();
+        $rOrder = ReturnOrder::all();
+//        if ($product == $rOrder){
+//            $rOrder = $request->get('name');
+//        }
+        return view('user/myReturnOrder',compact('user','rOrder'));
+    }
+
+    public function get()
+    {
+        $user = Auth::user();
+        $product = Product::all();
+        $orders = Order::all()
+            ->where('returnOrder',0);
+        return view('user/userOrder',compact('user','product','orders'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -42,8 +62,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
-        return "create";
+//        $pname = Product::lists('name','id')->all();
+//        return view('user/returnProduct',compact('pname'));
     }
 
     /**
@@ -54,7 +74,15 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+//        if($file = $request->get('product_id')) {
+//            $photo = ReturnOrder::create(['rIName'=>$file]);
+//            $input['product_id'] = $photo->id;
+//        }
+
+        ReturnOrder::create($input);
+        return redirect('user/myReturnOrder');
     }
 
     /**
