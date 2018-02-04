@@ -29,7 +29,7 @@
                                 @foreach($rOrder as $item)
                                     <tr>
                                         <td class="cart_description">
-                                            {{$item->product}}
+                                            {{$item->rIName}}
                                             {{--<p><img src="{{ asset('images/'.$item->image) }}" class="img-responsive" style="width: 100px; height: 80px;"></p>--}}
                                         </td>
                                         <td class="cart_quantity">

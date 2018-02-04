@@ -38,7 +38,7 @@ class HomeController extends Controller
 
     public function chart()
     {
-        $chart = Charts::multi('bar', 'material')
+        $chart = Charts::multi('bar', 'highcharts')
             // Setup the chart settings
             ->title("Monthly Sale Status")
             // A dimension of 0 means it will take 100% of the space

@@ -38,13 +38,9 @@ class OrderController extends Controller
 
     public function myreturn(Request $request)
     {
-        $user = Auth::user();
-        $product = Product::all();
         $rOrder = ReturnOrder::all();
-//        if ($product == $rOrder){
-//            $rOrder = $request->get('name');
-//        }
-        return view('user/myReturnOrder',compact('user','rOrder'));
+
+        return view('user/myReturnOrder',compact('rOrder'));
     }
 
     public function get()
