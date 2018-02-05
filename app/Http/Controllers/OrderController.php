@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Product;
-use App\ReturnOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,35 +21,28 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $product = Product::all();
+        $id = Auth::id();
+
+        /*$product = Product::all();
+
         $orders = Order::all()
-            ->where('returnOrder',0);
-        return view('user/userOrder',compact('user','product','orders'));
+
+            ->where('userID',$id)
+            ->where('returnOrder',0);*/
+        $orders = DB::table('orders')
+                ->join('products','orders.itemID','=','products.id')
+                ->join('photos','products.photo_id','=','photos.id')
+                ->get();
+        return view('user/userOrder',compact('user','orders'));
     }
 
     public function return()
     {
         $user = Auth::user();
-        $pname = Product::pluck('name','id')->all();
-        return view('user/returnProduct',compact('user','pname'));
-    }
-
-    public function myreturn(Request $request)
-    {
-        $rOrder = ReturnOrder::all();
-
-        return view('user/myReturnOrder',compact('rOrder'));
-    }
-
-    public function get()
-    {
-        $user = Auth::user();
         $product = Product::all();
-        $orders = Order::all()
-            ->where('returnOrder',0);
-        return view('user/userOrder',compact('user','product','orders'));
+        return view('user/returnProduct',compact('user','product'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -58,8 +50,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-//        $pname = Product::lists('name','id')->all();
-//        return view('user/returnProduct',compact('pname'));
+        //
+        return "create";
     }
 
     /**
@@ -70,15 +62,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-
-//        if($file = $request->get('product_id')) {
-//            $photo = ReturnOrder::create(['rIName'=>$file]);
-//            $input['product_id'] = $photo->id;
-//        }
-
-        ReturnOrder::create($input);
-        return redirect('user/myReturnOrder');
+        //
     }
 
     /**

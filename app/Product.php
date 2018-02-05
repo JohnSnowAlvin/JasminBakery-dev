@@ -16,9 +16,4 @@ class Product extends Model
     {
         return $this->belongsTo('App\Photo');
     }
-
-    public function rorder()
-    {
-        return $this->belongsTo('App\ReturnOrder');
-    }
 }
