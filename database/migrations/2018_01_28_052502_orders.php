@@ -14,8 +14,9 @@ class Orders extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->string('orderID');
+            $table->string('orderID')->default(0);
             $table->string('userID');
+            $table->string('photo_id');
             $table->string('cartRowID');
             $table->string('itemID');
             $table->string('itemName');

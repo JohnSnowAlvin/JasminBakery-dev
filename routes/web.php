@@ -32,7 +32,7 @@ Route::get('/clearCart', function (){
     return redirect('cartView');
 });
 
-Route::get('/checkout','CartController@checkout');
+Route::get('/checkout','CheckoutController@checkout');
 
 Route::resource('/orderHistory','OrderController');
 
@@ -64,4 +64,8 @@ Route::get('admin/orderList','HomeController@orderlist');
 Route::get('user/myReturnOrder','OrderController@myreturn');
 
 Route::get('user/userOrder','OrderController@get');
+
+Route::get('user/preOrder','OrderController@preOrder');
+
+Route::get('/printTable','HomeController@printTable');
 

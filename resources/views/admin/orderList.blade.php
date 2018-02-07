@@ -10,6 +10,8 @@
             </div>
             <div class="table-responsive cart_info">
                 @if($orders->count())
+                    {!! Form::open(['method' =>'POST', 'action' => ['HomeController@printTable',$order->id]]) !!}
+                    {!! Form::submit('Print', ['class' => 'btn btn-primary']) !!}
                     <table class="table table-condensed">
                         <thead>
 
@@ -81,6 +83,7 @@
                             <p>You haven't order yet</p>
                         @endif
                         </tbody>
+                        {!! Form::close() !!}
                     </table>
             </div>
         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
 use ConsoleTVs\Charts\Facades\Charts;
 use Illuminate\Http\Request;
 
@@ -30,13 +31,14 @@ class HomeController extends Controller
 
     public function orderlist()
     {
+        $user = User::all();
         $orders = Order::all();
-        return view('admin/orderList',compact('orders'));
+        return view('admin/orderList',compact('orders','user'));
     }
 
     public function chart()
     {
-        $chart = Charts::multi('bar', 'material')
+        $chart = Charts::multi('bar', 'highcharts')
             // Setup the chart settings
             ->title("Monthly Sale Status")
             // A dimension of 0 means it will take 100% of the space
@@ -53,5 +55,11 @@ class HomeController extends Controller
             ->labels(['One', 'Two', 'Three']);
 
         return view('admin/monthlySaleStatus', ['chart' => $chart]);
+    }
+
+    public function printTable($data)
+    {
+        $pdf = PDF::loadView('pdf.invoice', $data);
+        return $pdf->download('invoice.pdf');
     }
 }

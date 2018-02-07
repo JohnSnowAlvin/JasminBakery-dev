@@ -9,7 +9,6 @@
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
-            <th>Password</th>
             <th>Phone No.</th>
             <th>Address</th>
 
@@ -21,9 +20,14 @@
                     <td>{{ucfirst($user->firstName)}}</td>
                     <td>{{ucfirst($user->lastName)}}</td>
                     <td>{{$user->email}}</td>
-                    <td>{{$user->password}}</td>
                     <td>{{$user->phoneNumber}}</td>
                     <td>{{$user->address}}</td>
+                    <td>{!! Form::open(['method' =>'DELETE', 'action' => ['AdminUsersController@destroy',$user->id]]) !!}
+                    {{csrf_field()}}
+
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}</td>
+
+                    {!! Form::close() !!}
                 </tr>
             @endforeach
         @endif

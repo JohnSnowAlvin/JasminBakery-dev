@@ -17,5 +17,9 @@
         "laravel-mix": "^1.0",
         "lodash": "^4.17.4",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "datatables.net-buttons": "^1.5.1",
+        "datatables.net-buttons-dt": "^1.5.1"
     }
 }

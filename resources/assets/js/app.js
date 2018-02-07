@@ -9,6 +9,15 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
+importScripts('datatables.net-buttons-dt/css/buttons.dataTables.css')
+importScripts('datatables.net-buttons-dt/css/buttons.dataTables.css/buttons.dataTables.min.css')
+
+
+importScripts( 'datatables.net-buttons/js/buttons.colVis.js') ;
+importScripts ('datatables.net-buttons/js/buttons.html5.js') ;
+importScripts ('datatables.net-buttons/js/buttons.flash.js') ;
+importScripts ('datatables.net-buttons/js/buttons.print.js') ;
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

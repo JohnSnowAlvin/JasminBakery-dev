@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
           integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
           crossorigin="anonymous">
-
+    <link href="{{ asset('css/buttons.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
     @yield('link')
 </head>
@@ -58,7 +59,9 @@
                         </a>
                     </li>
                     <li><a href="{{ url('/products') }}">Products</a></li>
-                    @guest
+                    <li><a href="{{ url('/printTable') }}">Pre-Order</a></li>
+
+                @guest
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
@@ -109,5 +112,27 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+
+<script src="{{ asset('js/buttons.flash.min.js') }}"></script>
+{!! Html::script('js/buttons.html5.min.js') !!}
+{!! Html::script('js/buttons.print.min.js') !!}
+{!! Html::script('js/dataTables.buttons.min.js') !!}
+{!! Html::script('js/jquery-1.12.4.js') !!}
+{{--{!! Html::script('js/jquery.dataTables.js') !!}--}}
+{!! Html::script('js/jszip.min.js') !!}
+{{--{!! Html::script('js/pdfmake.min.js') !!}--}}
+{{--{!! Html::script('js/vfs_fonts.js') !!}--}}
+
+<script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
+{{--<script src="{{ asset('js/jquery.dataTables.js') }}"></script>--}}
+<script src="{{ asset('js/jszip.min.js') }}"></script>
+{{--<script src="{{ asset('js/pdfmake.min.js') }}"></script>--}}
+{{--<script src="{{ asset('js/vfs_fonts.js') }}"></script>--}}
+
+@yield('script')
+
 </body>
 </html>

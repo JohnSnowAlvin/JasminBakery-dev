@@ -13,7 +13,7 @@
 
                                     <div class="col-md-5 col-sm-12 col-xs-12">
                                         <div class="product-image">
-                                            <img src="{{ asset('image/'.$product->photo->file) }}" class="img-responsive" style="width: 500px; height: 250px;">
+                                            <img src="{{ asset('images/'.$product->photo->file) }}" class="img-responsive" style="width: 500px; height: 250px;">
                                             <span class="tag2 {{ strtolower($product->tag) }}">
 							{{ $product->tag }}
 						</span>
